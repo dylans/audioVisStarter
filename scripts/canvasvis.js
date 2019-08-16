@@ -5,6 +5,7 @@ import Vis from '/modules/Vis.js';
 // setup
 const visEl = document.querySelector('#visual');
 const rate = document.querySelector('#rate');
+const vol = document.querySelector('#volume');
 // setup 2D canvas plus resize
 // set up dpr for  vis
 const dpr = window.devicePixelRatio;
@@ -94,12 +95,21 @@ navigator.requestMIDIAccess({ sysex: false })
 					btnOn = false;
 					colorOverride = 0;
 				} else if (data[0] === 176) {
-					let playbackRate = (0.00101413)*(data[2]^2) + (0.0508419)*(data[2]) + (0.1);
-					rate.innerHTML = playbackRate;
-					vis.track.playbackRate = playbackRate;
-					vis2.track.playbackRate = playbackRate;
-					vis3.track.playbackRate = playbackRate;
-					vis4.track.playbackRate = playbackRate;
+					if (data[1]===1) {
+						let playbackRate = (0.00101413)*(data[2]^2) + (0.0508419)*(data[2]) + (0.1);
+						rate.innerHTML = playbackRate;
+						vis.track.playbackRate = playbackRate;
+						vis2.track.playbackRate = playbackRate;
+						vis3.track.playbackRate = playbackRate;
+						vis4.track.playbackRate = playbackRate;
+					} else {
+						let volume = data[2]/128;
+						vol.innerHTML = volume;
+						vis.track.volume = volume;
+						vis2.track.volume = volume;
+						vis3.track.volume = volume;
+						vis4.track.volume = volume;
+					}
 				}
 			}
 	 	}
