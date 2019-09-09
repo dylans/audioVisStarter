@@ -26,6 +26,18 @@ function Dimensions() {
 		this.height = (window.innerHeight)*dpr;
 	}
 }
+/*
+const image = new Image(300, 300); // Using optional size for image
+
+// Load an image of intrinsic size 300x227 in CSS pixels
+image.src = '/images/rhino.jpg';
+
+let imageState = false;
+
+image.onload = function() {
+	imageState = true;
+};
+*/
 
 let screenDim = new Dimensions();
 screenDim.setFullscreen(visEl);
@@ -135,6 +147,10 @@ vis.draw( () => {
 						ctx.fillStyle = 'blue';
 					}
 					ctx.arc(i*80, (i*40)*(10-i/3), f*2, 0, 2*Math.PI);
+/*					if (imageState) {
+						ctx.drawImage(image, i*80, (i*40)*(2-i/10), 300, 300);
+					}
+*/
 				break;
 			case 1:
 					if (colorOverride) {
@@ -171,6 +187,7 @@ vis.draw( () => {
 		}
 		ctx.stroke();
 		ctx.fill();
+
 		ctx.closePath();
 	})
 
